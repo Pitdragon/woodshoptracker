@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="woodshoptracker"
+config/description="App to track woodworking projects "
+config/version="1.0"
+run/main_scene="res://Scripts/project_card.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=500
+window/size/borderless=true
 
 [physics]
 

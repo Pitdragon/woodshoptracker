@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://fpxi1awwxfjd"]
+
+[ext_resource type="Script" uid="uid://cbb546kke0lc1" path="res://Scenes/ProjectCard.gd" id="1_e5aor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x56gn"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.080783345, 0.080783345, 0.080783345, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.08627451, 0.08627451, 0.08627451, 0.8666667)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_vp3e1"]
+font_names = PackedStringArray("Cambria")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6sie"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.41568628)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="SystemFont" id="SystemFont_5emd7"]
+font_names = PackedStringArray("Cambria")
+
+[sub_resource type="SystemFont" id="SystemFont_kmflx"]
+font_names = PackedStringArray("Cambria")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06e6"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 1, 1, 0)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[node name="ProjectCard" type="Control" unique_id=8454994]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1324895045]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_default_cursor_shape = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_x56gn")
+script = ExtResource("1_e5aor")
+
+[node name="PanelVbox" type="VBoxContainer" parent="PanelContainer" unique_id=354553631]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NameLabel" type="Label" parent="PanelContainer/PanelVbox" unique_id=1590420757]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("SystemFont_vp3e1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
+text = "ProjectName"
+horizontal_alignment = 1
+
+[node name="ColumnsHbox" type="HBoxContainer" parent="PanelContainer/PanelVbox" unique_id=1092726081]
+layout_mode = 2
+
+[node name="LeftsideLabels" type="VBoxContainer" parent="PanelContainer/PanelVbox/ColumnsHbox" unique_id=1689411663]
+layout_mode = 2
+
+[node name="CustomerLabel" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/LeftsideLabels" unique_id=694247560]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = SubResource("SystemFont_5emd7")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
+text = "Customer"
+horizontal_alignment = 1
+
+[node name="MaterialsLabel" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/LeftsideLabels" unique_id=1439935813]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = SubResource("SystemFont_5emd7")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
+text = "Material Costs"
+horizontal_alignment = 1
+
+[node name="CreatedLabel" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/LeftsideLabels" unique_id=908393105]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = SubResource("SystemFont_5emd7")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
+text = "Created"
+horizontal_alignment = 1
+
+[node name="RightsideValues" type="VBoxContainer" parent="PanelContainer/PanelVbox/ColumnsHbox" unique_id=940808611]
+layout_mode = 2
+
+[node name="CustomersName" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/RightsideValues" unique_id=129704164]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_kmflx")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_y06e6")
+text = "Customers name"
+
+[node name="Materials Cost" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/RightsideValues" unique_id=538110886]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_kmflx")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_y06e6")
+text = "Materials Cost"
+
+[node name="DateCreated" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/RightsideValues" unique_id=910791964]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_kmflx")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_y06e6")
+text = "date Created"
