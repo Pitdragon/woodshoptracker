@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cbb546kke0lc1" path="res://Scenes/ProjectCard.gd" id="1_e5aor"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x56gn"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
 bg_color = Color(1, 1, 1, 1)
 border_width_right = 5
 border_width_bottom = 5
@@ -24,11 +24,11 @@ shadow_offset = Vector2(1, 1)
 font_names = PackedStringArray("Cambria")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6sie"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0, 0, 0, 1)
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
@@ -49,10 +49,10 @@ font_names = PackedStringArray("Cambria")
 font_names = PackedStringArray("Cambria")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06e6"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
 bg_color = Color(1, 1, 1, 0)
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
@@ -73,27 +73,31 @@ script = ExtResource("1_e5aor")
 
 [node name="PanelVbox" type="VBoxContainer" parent="PanelContainer" unique_id=354553631]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
 [node name="NameLabel" type="Label" parent="PanelContainer/PanelVbox" unique_id=1590420757]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_vp3e1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
-text = "ProjectName"
+text = "project name"
 horizontal_alignment = 1
 
 [node name="ColumnsHbox" type="HBoxContainer" parent="PanelContainer/PanelVbox" unique_id=1092726081]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="LeftsideLabels" type="VBoxContainer" parent="PanelContainer/PanelVbox/ColumnsHbox" unique_id=1689411663]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="CustomerLabel" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/LeftsideLabels" unique_id=694247560]
-custom_minimum_size = Vector2(84, 0)
+custom_minimum_size = Vector2(78, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_5emd7")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
@@ -104,6 +108,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_5emd7")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
@@ -111,10 +116,11 @@ text = "Material Costs"
 horizontal_alignment = 1
 
 [node name="CreatedLabel" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/LeftsideLabels" unique_id=908393105]
-custom_minimum_size = Vector2(84, 0)
+custom_minimum_size = Vector2(78, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_5emd7")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
@@ -123,6 +129,7 @@ horizontal_alignment = 1
 
 [node name="RightsideValues" type="VBoxContainer" parent="PanelContainer/PanelVbox/ColumnsHbox" unique_id=940808611]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="CustomersName" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/RightsideValues" unique_id=129704164]
 custom_minimum_size = Vector2(100, 0)
@@ -144,7 +151,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_kmflx")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_y06e6")
-text = "Materials Cost"
+text = "total costs"
 
 [node name="DateCreated" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/RightsideValues" unique_id=910791964]
 custom_minimum_size = Vector2(100, 0)
