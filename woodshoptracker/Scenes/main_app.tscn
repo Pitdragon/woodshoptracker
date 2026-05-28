@@ -1,0 +1,340 @@
+[gd_scene format=3 uid="uid://brxfk6ed7twr6"]
+
+[ext_resource type="Script" uid="uid://bayeroj8ql5pu" path="res://Scripts/main_app.gd" id="1_cbjc3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o16eq"]
+bg_color = Color(0.69135684, 0.6913568, 0.6913567, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmmkt"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.90359825, 0.90359825, 0.9035982, 1)
+border_width_bottom = 5
+border_color = Color(0.15847227, 0.15847233, 0.15847221, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlpmq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x12gx"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.27387273, 0.27387276, 0.27387264, 1)
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7465"]
+bg_color = Color(0.2159017, 0.21590173, 0.21590161, 1)
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbjc3"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.20871013, 0.20871016, 0.20870999, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MainApp" type="Control" unique_id=328557562]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_cbjc3")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1653897081]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=260167601]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o16eq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=2038157073]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=234556274]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lmmkt")
+
+[node name="AppTitle" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=511180419]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Project Tracker"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=1421733962]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Exit
+"
+flat = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1693518190]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="AddProjectButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1665696702]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_mlpmq")
+text = "Add New Project"
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=419772762]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer" unique_id=602433619]
+layout_mode = 2
+follow_focus = true
+draw_focus_border = true
+
+[node name="ProjectGrid" type="GridContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer" unique_id=641418260]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="DetailsPanel" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=225517562]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_x12gx")
+
+[node name="DetailsVbox" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel" unique_id=193623641]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox" unique_id=2097025478]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t7465")
+
+[node name="DetailsTitle" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/PanelContainer" unique_id=1958823637]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Details panel"
+
+[node name="Details_project_name" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox" unique_id=1031895629]
+layout_mode = 2
+text = "Project:"
+
+[node name="Details_customers_name" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox" unique_id=2054346329]
+layout_mode = 2
+text = "Customer:"
+
+[node name="Date_Created" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox" unique_id=1190640035]
+layout_mode = 2
+text = "Date Created:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox" unique_id=1279756625]
+layout_mode = 2
+
+[node name="LabelMaterials" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/HBoxContainer" unique_id=1599087418]
+layout_mode = 2
+text = "Materials:"
+
+[node name="TotalCosts" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/HBoxContainer" unique_id=24593215]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "total Cost"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox" unique_id=947966386]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MaterialsList" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer" unique_id=2075966119]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1431123449]
+layout_mode = 2
+text = "-"
+
+[node name="Label5" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=99216]
+layout_mode = 2
+text = "-"
+
+[node name="Label6" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=551969047]
+layout_mode = 2
+text = "-"
+
+[node name="Label7" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=166363055]
+layout_mode = 2
+text = "-"
+
+[node name="Label8" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=734730203]
+layout_mode = 2
+text = "-"
+
+[node name="Label9" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=211872713]
+layout_mode = 2
+text = "-"
+
+[node name="Label10" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=884661025]
+layout_mode = 2
+text = "-"
+
+[node name="Label11" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1462391359]
+layout_mode = 2
+text = "-"
+
+[node name="Label12" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1168486855]
+layout_mode = 2
+text = "-"
+
+[node name="Label13" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1245447512]
+layout_mode = 2
+text = "-"
+
+[node name="Label14" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1340546373]
+layout_mode = 2
+text = "-"
+
+[node name="Label15" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=882922010]
+layout_mode = 2
+text = "-"
+
+[node name="Label16" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=969391216]
+layout_mode = 2
+text = "-"
+
+[node name="Label17" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=257128518]
+layout_mode = 2
+text = "-"
+
+[node name="Label18" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1517247532]
+layout_mode = 2
+text = "-"
+
+[node name="Label19" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1925980204]
+layout_mode = 2
+text = "-"
+
+[node name="Label20" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=28298116]
+layout_mode = 2
+text = "-"
+
+[node name="Label21" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1295590218]
+layout_mode = 2
+text = "-"
+
+[node name="Label22" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1959929714]
+layout_mode = 2
+text = "-"
+
+[node name="Label23" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1793870461]
+layout_mode = 2
+text = "-"
+
+[node name="Label24" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=17422520]
+layout_mode = 2
+text = "-"
+
+[node name="Label25" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1608562059]
+layout_mode = 2
+text = "-"
+
+[node name="Label26" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList" unique_id=1428500562]
+layout_mode = 2
+text = "-"
+
+[node name="ClearButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox" unique_id=1885460400]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Clear"
+
+[node name="NewProjectPanel" type="PanelContainer" parent="." unique_id=1067187190]
+visible = false
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 157.0
+offset_top = -226.0
+offset_right = 461.0
+offset_bottom = -96.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cbjc3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewProjectPanel" unique_id=1265724270]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NewProjectPanel/VBoxContainer" unique_id=629111487]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "New Project"
+horizontal_alignment = 1
+
+[node name="ProjectsName" type="TextEdit" parent="NewProjectPanel/VBoxContainer" unique_id=1060991258]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+size_flags_vertical = 0
+placeholder_text = "enter projects name"
+wrap_mode = 1
+
+[node name="CustomersName" type="TextEdit" parent="NewProjectPanel/VBoxContainer" unique_id=1316722660]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+size_flags_vertical = 2
+placeholder_text = "enter customers name"
+wrap_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NewProjectPanel/VBoxContainer" unique_id=401608710]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="NewProjectPanel/VBoxContainer/HBoxContainer" unique_id=151539959]
+layout_mode = 2
+text = "Save"
+
+[node name="CloseButton" type="Button" parent="NewProjectPanel/VBoxContainer/HBoxContainer" unique_id=1006174162]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Close"

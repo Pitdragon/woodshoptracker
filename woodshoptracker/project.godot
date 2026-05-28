@@ -13,12 +13,13 @@ config_version=5
 config/name="woodshoptracker"
 config/description="App to track woodworking projects "
 config/version="1.0"
-run/main_scene="res://Scripts/project_card.tscn"
+run/main_scene="uid://brxfk6ed7twr6"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1200
 window/size/borderless=true
 
 [physics]

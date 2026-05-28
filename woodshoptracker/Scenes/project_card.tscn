@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://fpxi1awwxfjd"]
 
-[ext_resource type="Script" uid="uid://cbb546kke0lc1" path="res://Scenes/ProjectCard.gd" id="1_e5aor"]
+[ext_resource type="Script" uid="uid://cbb546kke0lc1" path="res://Scripts/ProjectCard.gd" id="1_8ar3n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x56gn"]
 content_margin_left = 5.0
@@ -22,6 +22,24 @@ shadow_offset = Vector2(1, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_vp3e1"]
 font_names = PackedStringArray("Cambria")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ar3n"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.56078434)
+shadow_size = 5
+
+[sub_resource type="SystemFont" id="SystemFont_5emd7"]
+font_names = PackedStringArray("Cambria")
+subpixel_positioning = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6sie"]
 content_margin_left = 2.0
@@ -31,22 +49,16 @@ content_margin_bottom = 2.0
 bg_color = Color(0.972549, 0.972549, 0.972549, 1)
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
 border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 corner_detail = 10
 shadow_color = Color(0, 0, 0, 0.41568628)
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
-[sub_resource type="SystemFont" id="SystemFont_5emd7"]
-font_names = PackedStringArray("Cambria")
-
 [sub_resource type="SystemFont" id="SystemFont_kmflx"]
 font_names = PackedStringArray("Cambria")
+subpixel_positioning = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06e6"]
 content_margin_left = 2.0
@@ -59,30 +71,36 @@ border_color = Color(0, 0, 0, 1)
 border_blend = true
 
 [node name="ProjectCard" type="Control" unique_id=8454994]
+custom_minimum_size = Vector2(200, 150)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 150.0
+script = ExtResource("1_8ar3n")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1324895045]
 custom_minimum_size = Vector2(200, 150)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 150.0
+mouse_filter = 1
 mouse_default_cursor_shape = 16
 theme_override_styles/panel = SubResource("StyleBoxFlat_x56gn")
-script = ExtResource("1_e5aor")
 
 [node name="PanelVbox" type="VBoxContainer" parent="PanelContainer" unique_id=354553631]
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="NameLabel" type="Label" parent="PanelContainer/PanelVbox" unique_id=1590420757]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_vp3e1")
-theme_override_styles/normal = SubResource("StyleBoxFlat_i6sie")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8ar3n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8ar3n")
 text = "project name"
-horizontal_alignment = 1
+clip_text = true
 
 [node name="ColumnsHbox" type="HBoxContainer" parent="PanelContainer/PanelVbox" unique_id=1092726081]
 layout_mode = 2
@@ -142,7 +160,7 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_y06e6")
 text = "Customers name"
 
-[node name="Materials Cost" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/RightsideValues" unique_id=538110886]
+[node name="MaterialsCost" type="Label" parent="PanelContainer/PanelVbox/ColumnsHbox/RightsideValues" unique_id=538110886]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -163,3 +181,11 @@ theme_override_fonts/font = SubResource("SystemFont_kmflx")
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_y06e6")
 text = "date Created"
+
+[node name="PopupMenu" type="PopupMenu" parent="PanelContainer" unique_id=1070688572]
+oversampling_override = 1.0
+size = Vector2i(100, 35)
+always_on_top = true
+item_count = 1
+item_0/text = "Delete"
+item_0/id = 0
