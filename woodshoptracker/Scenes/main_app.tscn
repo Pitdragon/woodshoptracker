@@ -311,19 +311,17 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "New Project"
 horizontal_alignment = 1
 
-[node name="ProjectsName" type="TextEdit" parent="NewProjectPanel/VBoxContainer" unique_id=1060991258]
+[node name="ProjectsName" type="LineEdit" parent="NewProjectPanel/VBoxContainer" unique_id=443857168]
 custom_minimum_size = Vector2(300, 30)
 layout_mode = 2
 size_flags_vertical = 0
 placeholder_text = "enter projects name"
-wrap_mode = 1
 
-[node name="CustomersName" type="TextEdit" parent="NewProjectPanel/VBoxContainer" unique_id=1316722660]
+[node name="CustomersName" type="LineEdit" parent="NewProjectPanel/VBoxContainer" unique_id=666339521]
 custom_minimum_size = Vector2(300, 30)
 layout_mode = 2
 size_flags_vertical = 2
 placeholder_text = "enter customers name"
-wrap_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NewProjectPanel/VBoxContainer" unique_id=401608710]
 layout_mode = 2

@@ -18,8 +18,8 @@ var db_manager: DatabaseManager
 @onready var total_costs: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/HBoxContainer/TotalCosts
 
 # new project panel nodes
-@onready var projects_name:TextEdit = $NewProjectPanel/VBoxContainer/ProjectsName
-@onready var customers_name: TextEdit = $NewProjectPanel/VBoxContainer/CustomersName
+@onready var projects_name:LineEdit = $NewProjectPanel/VBoxContainer/ProjectsName
+@onready var customers_name: LineEdit = $NewProjectPanel/VBoxContainer/CustomersName
 @onready var save_button: Button = $NewProjectPanel/VBoxContainer/HBoxContainer/SaveButton
 @onready var close_button: Button = $NewProjectPanel/VBoxContainer/HBoxContainer/CloseButton
 
@@ -35,13 +35,22 @@ func connect_signals():
 	save_button.pressed.connect(save_new_project)
 	close_button.pressed.connect(close_button_pressed)
 	clear_button.pressed.connect(clear_button_pressed)
-
-
+	projects_name.text_submitted.connect(_on_enter_pressed)
+	customers_name.text_submitted.connect(_on_enter_pressed)
+	
 func add_new_project():
 	new_projects_panel.show()
 	projects_name.grab_focus()
 
 func save_new_project():
+	if projects_name.text.strip_edges() == "":
+		projects_name.placeholder_text = "Name can not be blank"
+		projects_name.grab_focus()
+		return
+	if customers_name.text.strip_edges() == "":
+		customers_name.placeholder_text = "Customers can not be blank"
+		customers_name.grab_focus()
+		return
 	var project = projects_name.text
 	var customer = customers_name.text
 	db_manager.add_new_project(project,customer)
@@ -112,3 +121,6 @@ func reset_details_panel():
 
 func clear_button_pressed():
 	reset_details_panel()
+	
+func _on_enter_pressed(_text: String):
+	save_new_project()

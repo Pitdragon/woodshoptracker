@@ -11,7 +11,6 @@ signal CardClicked(project_id)
 signal DeleteClicked(project_id)
 
 func _ready() -> void:
-	card_setup({"id": 101, "project_name": "Dining Room Table", "customers_name": "Andy Tark", "date_created": "05-25-26" })
 	popup_menu.id_pressed.connect(_on_popup_menu_id_pressed)
 
 func card_setup(project_row: Dictionary):
@@ -19,7 +18,7 @@ func card_setup(project_row: Dictionary):
 	project_name.text = project_row.get("project_name","")
 	customers_name.text = project_row.get("customers_name","")
 	costs.text = "No Material Assigned"
-	date_created.text = str(project_row.get("date_created",""))
+	date_created.text = get_date_from_unixtime(project_row.get("date_created",""))
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -34,3 +33,7 @@ func _on_popup_menu_id_pressed(menu_id: int):
 		0:
 			print("Deleted pressed id: " + str(project_id))
 			DeleteClicked.emit(project_id)
+
+func get_date_from_unixtime(unixtime:int):
+	var date = Time.get_date_string_from_unix_time(unixtime)
+	return date
