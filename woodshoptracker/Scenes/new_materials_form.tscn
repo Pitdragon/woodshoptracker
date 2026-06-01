@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://33r1d3bab86d"]
+
+[ext_resource type="Script" uid="uid://dfo3d8mbjeoan" path="res://Scenes/materials_form.gd" id="1_gjk5k"]
+[ext_resource type="PackedScene" uid="uid://y76pc7e6wevf" path="res://Scenes/materials_row.tscn" id="1_iylvb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbjc3"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.20871013, 0.20871016, 0.20870999, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MaterialsForm" type="PanelContainer" unique_id=1456419868]
+custom_minimum_size = Vector2(500, 200)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 278.0
+grow_horizontal = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_cbjc3")
+script = ExtResource("1_gjk5k")
+
+[node name="MaterialFormVBox" type="VBoxContainer" parent="." unique_id=1729945522]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MaterialFormVBox" unique_id=122743391]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Add Materials"
+horizontal_alignment = 1
+
+[node name="AddMaterialLine" type="Button" parent="MaterialFormVBox" unique_id=1498670298]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "add a material"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MaterialFormVBox" unique_id=1039253094]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MaterialFormVBox/HBoxContainer2" unique_id=55117975]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Quantity"
+
+[node name="Label2" type="Label" parent="MaterialFormVBox/HBoxContainer2" unique_id=1741891314]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Material Description"
+
+[node name="Label3" type="Label" parent="MaterialFormVBox/HBoxContainer2" unique_id=1084164409]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Cost Per"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MaterialFormVBox" unique_id=1644784391]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MaterialsFormList" type="VBoxContainer" parent="MaterialFormVBox/ScrollContainer" unique_id=143733080]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MaterialsRow" parent="MaterialFormVBox/ScrollContainer/MaterialsFormList" unique_id=471185490 instance=ExtResource("1_iylvb")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MaterialFormVBox" unique_id=458342550]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="SaveMaterials" type="Button" parent="MaterialFormVBox/HBoxContainer" unique_id=1709648210]
+layout_mode = 2
+text = "Save"
+
+[node name="CloseMaterials" type="Button" parent="MaterialFormVBox/HBoxContainer" unique_id=2137927488]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Close"

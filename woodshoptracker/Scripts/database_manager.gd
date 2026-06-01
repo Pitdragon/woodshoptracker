@@ -9,6 +9,7 @@ func _init() -> void:
 	db = SQLite.new()
 	db.path = path
 	db.open_db()
+	db.query("DROP TABLE IF EXISTS projects;")
 	db.query("""CREATE TABLE if NOT EXISTS projects
 			(id INTEGER PRIMARY KEY,
 			project_name TEXT NOT NULL,
@@ -17,10 +18,12 @@ func _init() -> void:
 			date_completed INTEGER,
 			is_complete INTEGER DEFAULT 0);"""
 			)
+	db.query("DROP TABLE IF EXISTS materials;")
 	db.query("""CREATE TABLE if NOT EXISTS materials
 			(id INTEGER PRIMARY KEY,
 			project_id INTEGER NOT NULL,
 			material_name TEXT NOT NULL,
+			quantity INTEGER default 1,
 			cost REAL DEFAULT 0,
 			FOREIGN KEY (project_id) REFERENCES projects(id));"""
 			)
@@ -51,4 +54,11 @@ func request_by_id(project_id:int) -> Array:
 func delete_project_from_db(project_id:int):
 	db.open_db()
 	db.query_with_bindings("delete from projects where id = ?", [project_id,])
+	db.close_db()
+
+func add_materials(project_id: int, material_name:String = "add materials", cost:float = 0.00):
+	db.open_db()
+	db.query_with_bindings("""insert into materials
+						(project_id, material_name, cost) Values (?,?,?);""",
+						[project_id, material_name, cost])
 	db.close_db()

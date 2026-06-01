@@ -3,7 +3,7 @@ extends Control
 var db_manager: DatabaseManager
 # scenes
 @onready var project_card: = preload("res://Scenes/project_card.tscn")
-
+@onready var materials_form = preload("res://Scenes/new_materials_form.tscn")
 # Main App nodes
 @onready var add_project:Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/AddProjectButton
 @onready var Project_grid:GridContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer/ProjectGrid
@@ -16,7 +16,8 @@ var db_manager: DatabaseManager
 @onready var details_customer: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/Details_customers_name
 @onready var date_created: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/Date_Created
 @onready var total_costs: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/HBoxContainer/TotalCosts
-
+var card_id: int = 0
+@onready var add_materials:Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/HBoxContainer2/AddMaterials
 # new project panel nodes
 @onready var projects_name:LineEdit = $NewProjectPanel/VBoxContainer/ProjectsName
 @onready var customers_name: LineEdit = $NewProjectPanel/VBoxContainer/CustomersName
@@ -37,7 +38,8 @@ func connect_signals():
 	clear_button.pressed.connect(clear_button_pressed)
 	projects_name.text_submitted.connect(_on_enter_pressed)
 	customers_name.text_submitted.connect(_on_enter_pressed)
-	
+	add_materials.pressed.connect(_on_add_materials_pressed)
+
 func add_new_project():
 	new_projects_panel.show()
 	projects_name.grab_focus()
@@ -89,7 +91,7 @@ func card_clicked(project_id:int):
 	details_project.text = details.project_name
 	details_customer.text = "Customer: " +details.customers_name
 	date_created.text = get_date_from_unixtime(details.date_created)
-	print("card clicked " + str(project_id))
+	card_id = details.id
 
 func clear_details_panel():
 	details_project.text = ""
@@ -108,6 +110,13 @@ func delete_project_clicked(project_id: int):
 	show_active_cards()
 	reset_details_panel()
 
+func _on_add_materials_pressed():
+	var form = materials_form.instantiate()
+	form.project_id = card_id
+	add_child(form)
+	form.save_materials_pressed.connect()
+
+
 func reset_details_panel():
 	details_project.text = "No Project Seleted"
 	details_customer.text = "Customers Name: "
@@ -121,6 +130,6 @@ func reset_details_panel():
 
 func clear_button_pressed():
 	reset_details_panel()
-	
+
 func _on_enter_pressed(_text: String):
 	save_new_project()

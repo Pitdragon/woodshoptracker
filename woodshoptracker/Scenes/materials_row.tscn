@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://y76pc7e6wevf"]
+
+[ext_resource type="Script" uid="uid://bhnggsun58783" path="res://Scripts/materials_row.gd" id="1_g7ivc"]
+
+[node name="MaterialsRow" type="HBoxContainer" unique_id=471185490]
+size_flags_vertical = 0
+script = ExtResource("1_g7ivc")
+
+[node name="NumberOfMaterials" type="LineEdit" parent="." unique_id=1266025368]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "1"
+max_length = 5
+
+[node name="ProjectsName" type="LineEdit" parent="." unique_id=921748468]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+placeholder_text = "Enter Description"
+max_length = 200
+
+[node name="Cost" type="LineEdit" parent="." unique_id=803821934]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "0.00"
+placeholder_text = "Cost per"
+
+[node name="TotalCostLabel" type="Label" parent="." unique_id=40111934]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Total: 0.00"
