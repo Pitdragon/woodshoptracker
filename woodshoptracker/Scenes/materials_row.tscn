@@ -12,6 +12,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "1"
+placeholder_text = "#"
 max_length = 5
 
 [node name="ProjectsName" type="LineEdit" parent="." unique_id=921748468]
@@ -26,7 +27,6 @@ max_length = 200
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 2
-text = "0.00"
 placeholder_text = "Cost per"
 
 [node name="TotalCostLabel" type="Label" parent="." unique_id=40111934]

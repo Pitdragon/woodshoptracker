@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://33r1d3bab86d"]
 
 [ext_resource type="Script" uid="uid://dfo3d8mbjeoan" path="res://Scenes/materials_form.gd" id="1_gjk5k"]
-[ext_resource type="PackedScene" uid="uid://y76pc7e6wevf" path="res://Scenes/materials_row.tscn" id="1_iylvb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbjc3"]
 border_width_left = 2
@@ -20,8 +19,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -250.0
+offset_top = 4.0
 offset_right = 250.0
-offset_bottom = 278.0
+offset_bottom = 282.0
 grow_horizontal = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_cbjc3")
@@ -36,9 +36,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Add Materials"
 horizontal_alignment = 1
 
-[node name="AddMaterialLine" type="Button" parent="MaterialFormVBox" unique_id=1498670298]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MaterialFormVBox" unique_id=351665468]
 layout_mode = 2
-size_flags_horizontal = 8
+
+[node name="ProjectID" type="Label" parent="MaterialFormVBox/HBoxContainer3" unique_id=1972752182]
+layout_mode = 2
+text = "Project ID: "
+
+[node name="AddMaterialLine" type="Button" parent="MaterialFormVBox/HBoxContainer3" unique_id=1498670298]
+layout_mode = 2
+size_flags_horizontal = 10
 text = "add a material"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MaterialFormVBox" unique_id=1039253094]
@@ -70,9 +77,6 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="MaterialsRow" parent="MaterialFormVBox/ScrollContainer/MaterialsFormList" unique_id=471185490 instance=ExtResource("1_iylvb")]
-layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MaterialFormVBox" unique_id=458342550]
 layout_mode = 2

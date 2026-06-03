@@ -24,7 +24,7 @@ func _init() -> void:
 			project_id INTEGER NOT NULL,
 			material_name TEXT NOT NULL,
 			quantity INTEGER default 1,
-			cost REAL DEFAULT 0,
+			price REAL DEFAULT 0,
 			FOREIGN KEY (project_id) REFERENCES projects(id));"""
 			)
 	db.close_db()
@@ -56,9 +56,30 @@ func delete_project_from_db(project_id:int):
 	db.query_with_bindings("delete from projects where id = ?", [project_id,])
 	db.close_db()
 
-func add_materials(project_id: int, material_name:String = "add materials", cost:float = 0.00):
+func add_materials(project_id: int, data:Array):
 	db.open_db()
-	db.query_with_bindings("""insert into materials
-						(project_id, material_name, cost) Values (?,?,?);""",
-						[project_id, material_name, cost])
+	for row in data:
+		var n = row["number"]
+		var t = row["material_type"]
+		var c = row["price"]
+		db.query_with_bindings("""insert into materials
+						(project_id, material_name, quantity, price) Values (?,?,?,?);""",
+						[project_id, t, n, c])
 	db.close_db()
+
+func get_materials_for_project(project_id):
+	db.open_db()
+	db.query_with_bindings("select * from materials where project_id = ?" , [project_id,])
+	var result = db.query_result
+	db.close_db()
+	return result
+
+func calculate_material_total_cost(project_id):
+	db.open_db()
+	db.query_with_bindings("select * from materials where project_id = ?" , [project_id,])
+	var result = db.query_result
+	var total_cost: float = 0.00
+	for item in result:
+		total_cost += item["price"] * item["quantity"]
+	db.close_db()
+	return total_cost

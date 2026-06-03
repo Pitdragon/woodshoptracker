@@ -13,11 +13,11 @@ signal DeleteClicked(project_id)
 func _ready() -> void:
 	popup_menu.id_pressed.connect(_on_popup_menu_id_pressed)
 
-func card_setup(project_row: Dictionary):
+func card_setup(project_row: Dictionary, total_cost):
 	project_id = project_row.get("id", "")
 	project_name.text = project_row.get("project_name","")
 	customers_name.text = project_row.get("customers_name","")
-	costs.text = "No Material Assigned"
+	costs.text = str(total_cost)
 	date_created.text = get_date_from_unixtime(project_row.get("date_created",""))
 
 func _gui_input(event: InputEvent) -> void:

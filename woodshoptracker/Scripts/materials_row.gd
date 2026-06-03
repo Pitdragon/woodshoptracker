@@ -3,21 +3,29 @@ extends HBoxContainer
 @onready var material_description: LineEdit = $ProjectsName
 @onready var cost: LineEdit = $Cost
 @onready var total: Label = $TotalCostLabel
+signal new_change
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	connect_signals()
+
+func connect_signals():
 	cost.text_submitted.connect(calculate_total)
 	cost.focus_exited.connect(calculate_total)
-	cost.focus_entered.connect(func(): cost.text = "")
+	cost.focus_entered.connect(func(): if cost.text != "": return)
+	cost.text_changed.connect(any_text_changed)
 	number.text_submitted.connect(calculate_total)
 	number.focus_exited.connect(calculate_total)
-	number.focus_entered.connect(func(): number.text = "")
+	number.focus_entered.connect(func(): if number.text != "": return)
+	number.text_changed.connect(any_text_changed)
+	material_description.text_changed.connect(any_text_changed)
 
 func calculate_total(_text= ""):
 
 	var totalcost: float
 	var price := cost.text
+	if number.text == "":
+		number.text = "1"
 	if price.strip_edges() == "":
-		cost.text = "0.00"
 		return
 	if price.is_valid_float() == false:
 		cost.text = "0.00"
@@ -29,7 +37,7 @@ func get_material_data() -> Dictionary:
 	if is_row_valid() == true:
 		var data = {
 			"number": number.text.to_int(),
-			"Material_type": material_description.text,
+			"material_type": material_description.text,
 			"price": cost.text.to_float()
 		}
 		return data
@@ -47,3 +55,12 @@ func has_valid_price() -> bool:
 
 func is_row_valid() -> bool:
 	return has_valid_quantity() and has_valid_mareial_type() and has_valid_price()
+
+func any_text_changed(_text:String) -> void:
+	new_change.emit()
+
+func setup_row(row_data:Dictionary):
+	number.text = str(row_data["quantity"])
+	material_description.text = row_data["material_name"]
+	cost.text = str(row_data["price"])
+	calculate_total()

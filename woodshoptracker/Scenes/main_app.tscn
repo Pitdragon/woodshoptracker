@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brxfk6ed7twr6"]
 
 [ext_resource type="Script" uid="uid://bayeroj8ql5pu" path="res://Scripts/main_app.gd" id="1_cbjc3"]
+[ext_resource type="Script" uid="uid://kh3wsermc0p6" path="res://Scenes/new_project_panel.gd" id="2_x12gx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o16eq"]
 bg_color = Color(0.69135684, 0.6913568, 0.6913567, 1)
@@ -221,6 +222,7 @@ offset_right = 461.0
 offset_bottom = -96.0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cbjc3")
+script = ExtResource("2_x12gx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NewProjectPanel" unique_id=1265724270]
 layout_mode = 2
