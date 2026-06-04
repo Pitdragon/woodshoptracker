@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://b50p1gksolm4p"]
+
+[ext_resource type="Script" uid="uid://bn3d4fqliunxu" path="res://Scripts/details_panel.gd" id="1_w6s7q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x12gx"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.27387273, 0.27387276, 0.27387264, 1)
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7465"]
+bg_color = Color(0.2159017, 0.21590173, 0.21590161, 1)
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[node name="DetailsPanel" type="PanelContainer" unique_id=1516555226]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+offset_bottom = 557.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x12gx")
+script = ExtResource("1_w6s7q")
+
+[node name="DetailsVbox" type="VBoxContainer" parent="." unique_id=498780001]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="DetailsVbox" unique_id=9455230]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t7465")
+
+[node name="DetailsTitle" type="Label" parent="DetailsVbox/PanelContainer" unique_id=1013434828]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Details panel"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="DetailsVbox" unique_id=1272777407]
+layout_mode = 2
+
+[node name="EditButton" type="Button" parent="DetailsVbox/HBoxContainer2" unique_id=1434797257]
+layout_mode = 2
+text = "Edit Project"
+
+[node name="AddMaterials" type="Button" parent="DetailsVbox/HBoxContainer2" unique_id=1629589889]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "add materials"
+
+[node name="Details_project_name" type="Label" parent="DetailsVbox" unique_id=1598460402]
+layout_mode = 2
+text = "Project:"
+
+[node name="Details_customers_name" type="Label" parent="DetailsVbox" unique_id=29873044]
+layout_mode = 2
+text = "Customer:"
+
+[node name="Date_Created" type="Label" parent="DetailsVbox" unique_id=1631747087]
+layout_mode = 2
+text = "Date Created:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DetailsVbox" unique_id=830935387]
+layout_mode = 2
+
+[node name="LabelMaterials" type="Label" parent="DetailsVbox/HBoxContainer" unique_id=2112959031]
+layout_mode = 2
+text = "Materials:"
+
+[node name="TotalCosts" type="Label" parent="DetailsVbox/HBoxContainer" unique_id=1446953528]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "total Cost"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DetailsVbox" unique_id=1390077008]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MaterialsList" type="VBoxContainer" parent="DetailsVbox/ScrollContainer" unique_id=1245820845]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="DetailsVbox/ScrollContainer/MaterialsList" unique_id=219618296]
+layout_mode = 2
+text = "-"
+
+[node name="CloseButton" type="Button" parent="DetailsVbox" unique_id=1089002363]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Close"

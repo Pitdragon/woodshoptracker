@@ -36,7 +36,7 @@ func _input(event):
 func add_material_pressed():
 	var row = material_row.instantiate()
 	list.add_child(row)
-	row.grab_focus()
+	row.number.grab_focus()
 	row.new_change.connect(update_save_button)
 
 func update_save_button():

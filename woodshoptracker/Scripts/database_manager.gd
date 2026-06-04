@@ -67,14 +67,14 @@ func add_materials(project_id: int, data:Array):
 						[project_id, t, n, c])
 	db.close_db()
 
-func get_materials_for_project(project_id):
+func get_materials_for_project(project_id: int) -> Array:
 	db.open_db()
 	db.query_with_bindings("select * from materials where project_id = ?" , [project_id,])
 	var result = db.query_result
 	db.close_db()
 	return result
 
-func calculate_material_total_cost(project_id):
+func calculate_material_total_cost(project_id: int) -> float:
 	db.open_db()
 	db.query_with_bindings("select * from materials where project_id = ?" , [project_id,])
 	var result = db.query_result

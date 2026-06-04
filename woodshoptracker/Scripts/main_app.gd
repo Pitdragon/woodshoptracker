@@ -4,21 +4,16 @@ var db_manager: DatabaseManager
 # scenes
 @onready var project_card: = preload("res://Scenes/project_card.tscn")
 @onready var materials_form = preload("res://Scenes/new_materials_form.tscn")
+@onready var details_panel = preload("res://Scenes/details_panel.tscn")
 # Main App nodes
 @onready var add_project:Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/AddProjectButton
 @onready var Project_grid:GridContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer/ProjectGrid
 @onready var new_projects_panel: PanelContainer = $NewProjectPanel
 @onready var exit: Button = $MarginContainer/PanelContainer/VBoxContainer/PanelContainer/ExitButton
-@onready var clear_button: Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ClearButton
-# Details panel nodes
-@onready var materiasl_list: VBoxContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/ScrollContainer/MaterialsList
-@onready var details_project: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/Details_project_name
-@onready var details_customer: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/Details_customers_name
-@onready var date_created: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/Date_Created
-@onready var total_costs: Label = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/HBoxContainer/TotalCosts
-var card_id: int = 0
-var card_clicked: bool = false
-@onready var add_materials:Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DetailsPanel/DetailsVbox/HBoxContainer2/AddMaterials
+@onready var content_hbox:HBoxContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer
+
+var current_details_panel: Node = null
+
 # new project panel nodes
 @onready var projects_name:LineEdit = $NewProjectPanel/VBoxContainer/ProjectsName
 @onready var customers_name: LineEdit = $NewProjectPanel/VBoxContainer/CustomersName
@@ -36,12 +31,13 @@ func connect_signals():
 	exit.pressed.connect(exit_button_pressed)
 	save_button.pressed.connect(save_new_project)
 	close_button.pressed.connect(close_button_pressed)
-	clear_button.pressed.connect(clear_button_pressed)
 	projects_name.text_submitted.connect(_on_enter_pressed)
 	customers_name.text_submitted.connect(_on_enter_pressed)
-	add_materials.pressed.connect(_on_add_materials_pressed)
 
 func add_new_project():
+	if current_details_panel != null:
+		current_details_panel.queue_free()
+		current_details_panel = null
 	new_projects_panel.show()
 	projects_name.grab_focus()
 
@@ -87,26 +83,24 @@ func show_active_cards():
 
 
 func _on_card_clicked(project_id:int):
-	clear_details_panel()
-	card_clicked = true
-	var details: Dictionary
-	var request = db_manager.request_by_id(project_id)
-	for project in request:
-		details = project
-	details_project.text = details.project_name
-	details_customer.text = "Customer: " +details.customers_name
-	date_created.text = get_date_from_unixtime(details.date_created)
-	show_materials_in_details(project_id)
-	card_id = details.id
+	if current_details_panel != null:
+		current_details_panel.queue_free()
+		current_details_panel = null
 
-func clear_details_panel():
-	card_clicked = false
-	details_project.text = ""
-	details_customer.text = ""
-	date_created.text = ""
-	total_costs.text = "0.00"
-	for child in materiasl_list.get_children():
-		child.queue_free()
+	var project_array = db_manager.request_by_id(project_id)
+	var materials_array = db_manager.get_materials_for_project(project_id)
+	var price_total = db_manager.calculate_material_total_cost(project_id)
+
+	var details = details_panel.instantiate()
+	current_details_panel = details
+	details.add_clicked.connect(_on_add_materials_pressed)
+	details.edit_clicked.connect(func(_project_id): print("edit clicked"))
+	content_hbox.add_child(details)
+	for i in project_array:
+		var project_data = i
+		details.display_project_details(project_data)
+	details.display_materials(materials_array, price_total)
+
 
 func get_date_from_unixtime(unixtime:int):
 	var date = Time.get_date_string_from_unix_time(unixtime)
@@ -115,34 +109,16 @@ func get_date_from_unixtime(unixtime:int):
 func delete_project_clicked(project_id: int):
 	db_manager.delete_project_from_db(project_id)
 	show_active_cards()
-	reset_details_panel()
-
-func _on_add_materials_pressed():
-	if card_clicked:
-		var form = materials_form.instantiate()
-		form.project_id = card_id
-		form.project_name = details_project.text
-		add_child(form)
-		form.save_materials_pressed.connect(_save_materials_pressed)
-		var m = db_manager.get_materials_for_project(card_id)
-		form.setup_form(m)
 
 
+func _on_add_materials_pressed(project_id):
+	var form = materials_form.instantiate()
+	form.save_materials_pressed.connect(_save_materials_pressed)
+	form.project_id = project_id
+	add_child(form)
+	var materials_array = db_manager.get_materials_for_project(project_id)
+	form.setup_form(materials_array)
 
-func reset_details_panel():
-	details_project.text = "No Project Seleted"
-	details_customer.text = "Customers Name: "
-	date_created.text = "Date Created"
-	total_costs.text = "Total Costs"
-	for child in materiasl_list.get_children():
-		child.queue_free()
-	var label = Label.new()
-	materiasl_list.add_child(label)
-	label.text = "- no Materials added"
-
-func clear_button_pressed():
-	reset_details_panel()
-	card_clicked = false
 
 func _on_enter_pressed(_text: String):
 	save_new_project()
@@ -150,10 +126,5 @@ func _on_enter_pressed(_text: String):
 func _save_materials_pressed(project_id: int, data: Array):
 	db_manager.add_materials(project_id, data)
 	show_active_cards()
-
-func show_materials_in_details(project_id):
-	var m = db_manager.get_materials_for_project(project_id)
-	for item in m:
-		var label = Label.new()
-		label.text = "- %s | %s | $%s" % [item.quantity, item.material_name, item.price]
-		materiasl_list.add_child(label)
+	_on_card_clicked(project_id)
+	print("save materials pressed for project_id: %s" % project_id)

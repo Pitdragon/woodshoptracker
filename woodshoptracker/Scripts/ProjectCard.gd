@@ -17,7 +17,7 @@ func card_setup(project_row: Dictionary, total_cost):
 	project_id = project_row.get("id", "")
 	project_name.text = project_row.get("project_name","")
 	customers_name.text = project_row.get("customers_name","")
-	costs.text = str(total_cost)
+	costs.text = "Total: $" + "%.2f" % total_cost
 	date_created.text = get_date_from_unixtime(project_row.get("date_created",""))
 
 func _gui_input(event: InputEvent) -> void:
