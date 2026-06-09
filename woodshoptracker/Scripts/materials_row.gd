@@ -3,9 +3,13 @@ extends HBoxContainer
 @onready var material_description: LineEdit = $ProjectsName
 @onready var cost: LineEdit = $Cost
 @onready var total: Label = $TotalCostLabel
+@onready var popup_menu: PopupMenu = $PopupMenu
+@onready var delete_button: Button = $DeleteButton
 signal new_change
+signal DeleteClicked
 var project_id: int
-var material_id: int
+var material_id: int = -1
+
 
 
 
@@ -23,6 +27,8 @@ func connect_signals():
 	number.focus_entered.connect(func(): if number.text != "": return)
 	number.text_changed.connect(any_text_changed)
 	material_description.text_changed.connect(any_text_changed)
+	popup_menu.id_pressed.connect(_on_popup_menu_id_pressed)
+	delete_button.pressed.connect(func(): DeleteClicked.emit(material_id))
 
 func calculate_total(_text= ""):
 
@@ -43,7 +49,8 @@ func get_material_data() -> Dictionary:
 		var data = {
 			"number": number.text.to_int(),
 			"material_description": material_description.text,
-			"price": cost.text.to_float()
+			"price": cost.text.to_float(),
+			"material_id": material_id
 		}
 		return data
 	else:
@@ -71,3 +78,15 @@ func setup_row(row_data:Dictionary):
 	calculate_total()
 	project_id = row_data.get("project_id")
 	material_id = row_data.get("id")
+
+func _on_popup_menu_id_pressed(menu_id: int):
+	match menu_id:
+		0:
+			print("Deleted pressed id: " + str(project_id))
+			DeleteClicked.emit(material_id)
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			popup_menu.popup()
+			popup_menu.position = get_global_mouse_position()

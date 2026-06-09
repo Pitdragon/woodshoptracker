@@ -53,7 +53,13 @@ func request_by_id(project_id:int) -> Dictionary:
 
 func delete_project_from_db(project_id:int):
 	db.open_db()
+	db.query_with_bindings("delete from materials where project_id = ?",[project_id])
 	db.query_with_bindings("delete from projects where id = ?", [project_id,])
+	db.close_db()
+
+func delete_material_from_db(material_id: int, project_id: int):
+	db.open_db()
+	db.query_with_bindings("delete from materials where id = ? and project_id = ?", [material_id, project_id,])
 	db.close_db()
 
 func add_materials(project_id: int, data:Array):
@@ -83,3 +89,23 @@ func calculate_material_total_cost(project_id: int) -> float:
 		total_cost += item["price"] * item["quantity"]
 	db.close_db()
 	return total_cost
+
+func update_materials(project_id: int, materials_data:Array):
+	db.open_db()
+	for row in materials_data:
+		var description = row["material_description"]
+		var num = row["number"]
+		var price = row["price"]
+		var id = row["material_id"]
+
+		db.query_with_bindings("""UPDATE materials SET
+						material_description = ?, quantity = ?, price = ? WHERE id = ? and project_id = ? """,
+						[description, num, price, id, project_id])
+	db.close_db()
+
+func update_project(project_id, project_data):
+	db.open_db()
+	db.query_with_bindings("""UPDATE projects SET
+						project_name = ?, customers_name =? WHERE id = ?""",
+						[project_data.get("project_name"), project_data.get("customer_name"), project_id])
+	db.close_db()

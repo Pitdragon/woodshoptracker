@@ -111,6 +111,9 @@ func get_date_from_unixtime(unixtime:int):
 func delete_project_clicked(project_id: int):
 	db_manager.delete_project_from_db(project_id)
 	show_active_cards()
+	if current_details_panel != null:
+		current_details_panel.queue_free()
+		current_details_panel = null
 
 
 func _on_add_materials_pressed(project_id):
@@ -137,9 +140,23 @@ func on_edit_project_pressed(project_id):
 		current_form_open = null
 	var project_dict = db_manager.request_by_id(project_id)
 	var materials_array = db_manager.get_materials_for_project(project_id)
-	print(project_dict)
+	print(materials_array)
 	var edit = edit_form.instantiate()
 	add_child(edit)
 	edit.setup_form(project_dict, materials_array)
 	edit.add_materials_pressed.connect(_on_add_materials_pressed)
+	edit.update_pressed.connect(update_project_changes)
+	edit.delete_row.connect(delete_material_row)
 	current_form_open = edit
+
+func update_project_changes(project_id, project_data, materials_data):
+	db_manager.update_project(project_id, project_data)
+	db_manager.update_materials(project_id, materials_data)
+	_on_card_clicked(project_id)
+	show_active_cards()
+
+func delete_material_row(material_id, project_id):
+	db_manager.delete_material_from_db(material_id, project_id)
+	on_edit_project_pressed(project_id)
+	_on_card_clicked(project_id)
+	show_active_cards()

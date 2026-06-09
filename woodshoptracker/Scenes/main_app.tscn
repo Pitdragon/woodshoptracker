@@ -132,6 +132,7 @@ theme_override_constants/v_separation = 10
 columns = 3
 
 [node name="NewProjectPanel" type="PanelContainer" parent="." unique_id=1067187190]
+visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 1
 anchors_preset = 5

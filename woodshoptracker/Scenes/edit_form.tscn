@@ -95,7 +95,27 @@ text = "Materials"
 [node name="AddMaterialsButton" type="Button" parent="FormVBox/HBoxContainer4" unique_id=934301559]
 layout_mode = 2
 size_flags_horizontal = 10
-text = "add materials"
+text = "new material"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="FormVBox" unique_id=1608642197]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="FormVBox/HBoxContainer5" unique_id=1892119351]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Quantity"
+
+[node name="Label2" type="Label" parent="FormVBox/HBoxContainer5" unique_id=849870575]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Material Description"
+
+[node name="Label3" type="Label" parent="FormVBox/HBoxContainer5" unique_id=973411315]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Cost Per"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="FormVBox" unique_id=945105945]
 layout_mode = 2

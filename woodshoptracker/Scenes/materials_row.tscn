@@ -11,7 +11,6 @@ custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "1"
 placeholder_text = "#"
 max_length = 5
 
@@ -35,3 +34,14 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Total: 0.00"
+
+[node name="PopupMenu" type="PopupMenu" parent="." unique_id=431284076]
+oversampling_override = 1.0
+size = Vector2i(100, 35)
+item_count = 1
+item_0/text = "delete"
+item_0/id = 0
+
+[node name="DeleteButton" type="Button" parent="." unique_id=1999534879]
+layout_mode = 2
+text = "X"

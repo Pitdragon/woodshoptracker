@@ -7,7 +7,7 @@ extends PanelContainer
 @onready var date_created: Label = $DetailsVbox/Date_Created
 @onready var total_costs: Label = $DetailsVbox/HBoxContainer/TotalCosts
 @onready var edit_button: Button = $DetailsVbox/HBoxContainer2/EditButton
-@onready var add_materials:Button = $DetailsVbox/HBoxContainer2/AddMaterials
+
 @onready var close_button:Button = $DetailsVbox/CloseButton
 var project_id: int = 0
 var card_clicked: bool = false
@@ -17,7 +17,7 @@ signal edit_clicked
 
 
 func _ready() -> void:
-	add_materials.pressed.connect(_on_add_materials_pressed)
+
 	edit_button.pressed.connect(_on_edit_button_clicked)
 	close_button.pressed.connect(queue_free)
 
@@ -33,7 +33,7 @@ func display_project_details(project_data: Dictionary):
 func display_materials(materials_data:Array, price_total: float):
 	for item in materials_data:
 		var label = Label.new()
-		label.text = "*    %s | %s | $%s" % [item.quantity, item.material_description, item.price]
+		label.text = "*    %s | %s | $%.2f" % [item.quantity, item.material_description, item.price]
 		materials_list.add_child(label)
 		total_costs.text = "Total: $" + "%.2f" % price_total
 

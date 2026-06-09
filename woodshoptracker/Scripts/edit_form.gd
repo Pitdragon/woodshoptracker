@@ -11,6 +11,7 @@ extends PanelContainer
 
 signal update_pressed
 signal add_materials_pressed
+signal delete_row
 
 var project_id: int
 
@@ -33,6 +34,13 @@ func setup_form(projects_dict, materials_array):
 		var row = mat_row.instantiate()
 		materials_list.add_child(row)
 		row.setup_row(mat)
+		row.material_id= mat.get("id")
+		row.new_change.connect(update_update_button)
+		row.DeleteClicked.connect(_delete_row_clicked)
+
+func _delete_row_clicked(material_id):
+	delete_row.emit(material_id, project_id)
+
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -41,8 +49,22 @@ func _input(event):
 
 
 func on_update_pressed():
-	update_pressed.emit(project_id)
-	# the inbetween
-	#
-	#
+	var materials_data: Array = []
+	var project_data: Dictionary = {"project_name": project_name.text, "customer_name": customer_name.text}
+
+	for child in materials_list.get_children():
+		materials_data.append(child.get_material_data())
+	update_pressed.emit(project_id, project_data, materials_data)
 	queue_free()
+
+
+func check_is_row_valid() -> bool:
+	var is_valid: bool = true
+	for row in materials_list.get_children():
+		var check = row.is_row_valid()
+		if check == false:
+			is_valid = false
+	return is_valid
+
+func update_update_button():
+	update_button.disabled = not check_is_row_valid()

@@ -24,9 +24,9 @@ custom_minimum_size = Vector2(500, 200)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -250.0
+offset_left = -300.0
 offset_top = 60.0
-offset_right = 250.0
+offset_right = 200.0
 offset_bottom = 354.0
 grow_horizontal = 2
 size_flags_vertical = 3
@@ -54,7 +54,7 @@ text = "Project ID: "
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "add a material"
+text = "add new material"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MaterialFormVBox" unique_id=1039253094]
 layout_mode = 2
