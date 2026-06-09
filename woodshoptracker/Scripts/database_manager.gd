@@ -9,7 +9,7 @@ func _init() -> void:
 	db = SQLite.new()
 	db.path = path
 	db.open_db()
-	db.query("DROP TABLE IF EXISTS projects;")
+	#db.query("DROP TABLE IF EXISTS projects;")
 	db.query("""CREATE TABLE if NOT EXISTS projects
 			(id INTEGER PRIMARY KEY,
 			project_name TEXT NOT NULL,
@@ -18,11 +18,11 @@ func _init() -> void:
 			date_completed INTEGER,
 			is_complete INTEGER DEFAULT 0);"""
 			)
-	db.query("DROP TABLE IF EXISTS materials;")
+	#db.query("DROP TABLE IF EXISTS materials;")
 	db.query("""CREATE TABLE if NOT EXISTS materials
 			(id INTEGER PRIMARY KEY,
 			project_id INTEGER NOT NULL,
-			material_name TEXT NOT NULL,
+			material_description TEXT NOT NULL,
 			quantity INTEGER default 1,
 			price REAL DEFAULT 0,
 			FOREIGN KEY (project_id) REFERENCES projects(id));"""
@@ -44,12 +44,12 @@ func request_active_projects() -> Array:
 	db.close_db()
 	return result
 
-func request_by_id(project_id:int) -> Array:
+func request_by_id(project_id:int) -> Dictionary:
 	db.open_db()
 	db.query_with_bindings("Select * From projects where id = ?", [project_id,])
 	db.close_db()
 	var result = db.query_result
-	return result
+	return result[0]
 
 func delete_project_from_db(project_id:int):
 	db.open_db()
@@ -59,12 +59,12 @@ func delete_project_from_db(project_id:int):
 func add_materials(project_id: int, data:Array):
 	db.open_db()
 	for row in data:
-		var n = row["number"]
-		var t = row["material_type"]
+		var q = row["number"]
+		var n = row["material_description"]
 		var c = row["price"]
 		db.query_with_bindings("""insert into materials
-						(project_id, material_name, quantity, price) Values (?,?,?,?);""",
-						[project_id, t, n, c])
+						(project_id, material_description, quantity, price) Values (?,?,?,?);""",
+						[project_id, n, q, c])
 	db.close_db()
 
 func get_materials_for_project(project_id: int) -> Array:

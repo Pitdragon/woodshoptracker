@@ -33,7 +33,7 @@ func display_project_details(project_data: Dictionary):
 func display_materials(materials_data:Array, price_total: float):
 	for item in materials_data:
 		var label = Label.new()
-		label.text = "*    %s | %s | $%s" % [item.quantity, item.material_name, item.price]
+		label.text = "*    %s | %s | $%s" % [item.quantity, item.material_description, item.price]
 		materials_list.add_child(label)
 		total_costs.text = "Total: $" + "%.2f" % price_total
 

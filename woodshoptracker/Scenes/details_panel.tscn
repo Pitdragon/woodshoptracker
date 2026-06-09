@@ -84,10 +84,6 @@ size_flags_vertical = 3
 [node name="MaterialsList" type="VBoxContainer" parent="DetailsVbox/ScrollContainer" unique_id=1245820845]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="DetailsVbox/ScrollContainer/MaterialsList" unique_id=219618296]
-layout_mode = 2
-text = "-"
-
 [node name="CloseButton" type="Button" parent="DetailsVbox" unique_id=1089002363]
 layout_mode = 2
 size_flags_horizontal = 4

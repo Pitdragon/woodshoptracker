@@ -60,14 +60,8 @@ func check_is_row_valid() -> bool:
 			is_valid = false
 	return is_valid
 
-func setup_form(material_data: Array):
-
-	for data in material_data:
-		var row = material_row.instantiate()
-		list.add_child(row)
-		row.setup_row(data)
-	if list.get_children().size() < 1:
-		add_material_pressed()
+func setup_form():
+	add_material_pressed()
 
 	id_label.text = "Project ID: %s | %s" % [project_id, project_name]
 	save_button.disabled = true

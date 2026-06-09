@@ -5,6 +5,8 @@ var db_manager: DatabaseManager
 @onready var project_card: = preload("res://Scenes/project_card.tscn")
 @onready var materials_form = preload("res://Scenes/new_materials_form.tscn")
 @onready var details_panel = preload("res://Scenes/details_panel.tscn")
+@onready var edit_form = preload("res://Scenes/edit_form.tscn")
+
 # Main App nodes
 @onready var add_project:Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/AddProjectButton
 @onready var Project_grid:GridContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer/ProjectGrid
@@ -13,6 +15,7 @@ var db_manager: DatabaseManager
 @onready var content_hbox:HBoxContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer
 
 var current_details_panel: Node = null
+var current_form_open: Node = null
 
 # new project panel nodes
 @onready var projects_name:LineEdit = $NewProjectPanel/VBoxContainer/ProjectsName
@@ -43,11 +46,11 @@ func add_new_project():
 
 func save_new_project():
 	if projects_name.text.strip_edges() == "":
-		projects_name.placeholder_text = "Name can not be blank"
+		projects_name.placeholder_text = "Project can not be blank"
 		projects_name.grab_focus()
 		return
 	if customers_name.text.strip_edges() == "":
-		customers_name.placeholder_text = "Customers can not be blank"
+		customers_name.placeholder_text = "Customers name can not be blank"
 		customers_name.grab_focus()
 		return
 	var project = projects_name.text
@@ -87,18 +90,17 @@ func _on_card_clicked(project_id:int):
 		current_details_panel.queue_free()
 		current_details_panel = null
 
-	var project_array = db_manager.request_by_id(project_id)
+	var project_data = db_manager.request_by_id(project_id)
 	var materials_array = db_manager.get_materials_for_project(project_id)
 	var price_total = db_manager.calculate_material_total_cost(project_id)
 
 	var details = details_panel.instantiate()
 	current_details_panel = details
 	details.add_clicked.connect(_on_add_materials_pressed)
-	details.edit_clicked.connect(func(_project_id): print("edit clicked"))
+	details.edit_clicked.connect(on_edit_project_pressed)
 	content_hbox.add_child(details)
-	for i in project_array:
-		var project_data = i
-		details.display_project_details(project_data)
+
+	details.display_project_details(project_data)
 	details.display_materials(materials_array, price_total)
 
 
@@ -116,8 +118,7 @@ func _on_add_materials_pressed(project_id):
 	form.save_materials_pressed.connect(_save_materials_pressed)
 	form.project_id = project_id
 	add_child(form)
-	var materials_array = db_manager.get_materials_for_project(project_id)
-	form.setup_form(materials_array)
+	form.setup_form()
 
 
 func _on_enter_pressed(_text: String):
@@ -128,3 +129,17 @@ func _save_materials_pressed(project_id: int, data: Array):
 	show_active_cards()
 	_on_card_clicked(project_id)
 	print("save materials pressed for project_id: %s" % project_id)
+	on_edit_project_pressed(project_id)
+
+func on_edit_project_pressed(project_id):
+	if current_form_open !=null:
+		current_form_open.queue_free()
+		current_form_open = null
+	var project_dict = db_manager.request_by_id(project_id)
+	var materials_array = db_manager.get_materials_for_project(project_id)
+	print(project_dict)
+	var edit = edit_form.instantiate()
+	add_child(edit)
+	edit.setup_form(project_dict, materials_array)
+	edit.add_materials_pressed.connect(_on_add_materials_pressed)
+	current_form_open = edit

@@ -29,7 +29,7 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
-bg_color = Color(0.7792914, 0.7792914, 0.7792912, 1)
+bg_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -132,20 +132,16 @@ theme_override_constants/v_separation = 10
 columns = 3
 
 [node name="NewProjectPanel" type="PanelContainer" parent="." unique_id=1067187190]
-visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -152.0
-offset_top = -100.0
-offset_right = 152.0
-offset_bottom = 100.0
+offset_left = -160.0
+offset_top = 60.0
+offset_right = 160.0
+offset_bottom = 260.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cbjc3")
 script = ExtResource("2_x12gx")
 

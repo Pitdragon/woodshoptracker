@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://dbqvkd6jjtr4o"]
+
+[ext_resource type="Script" uid="uid://d7if1j3kd6hp" path="res://Scripts/edit_form.gd" id="1_o2fwf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8skii"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hjou"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex2f"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0.45840496, 0.45840508, 0.45840478, 1)
+border_blend = true
+
+[node name="EditForm" type="PanelContainer" unique_id=24955596]
+custom_minimum_size = Vector2(450, 400)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 460.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_8skii")
+script = ExtResource("1_o2fwf")
+
+[node name="FormVBox" type="VBoxContainer" parent="." unique_id=1461893715]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="FormVBox" unique_id=5685821]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_8hjou")
+text = "Edit Form"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FormVBox" unique_id=556427612]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="FormVBox/HBoxContainer" unique_id=1004333295]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Project: "
+
+[node name="ProjectName" type="LineEdit" parent="FormVBox/HBoxContainer" unique_id=83830739]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="FormVBox" unique_id=1399963184]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="FormVBox/HBoxContainer2" unique_id=1360124424]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Customer: "
+
+[node name="CustomerName" type="LineEdit" parent="FormVBox/HBoxContainer2" unique_id=1700656744]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="FormVBox" unique_id=1538515476]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="FormVBox/HBoxContainer4" unique_id=32617777]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_7ex2f")
+text = "Materials"
+
+[node name="AddMaterialsButton" type="Button" parent="FormVBox/HBoxContainer4" unique_id=934301559]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "add materials"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FormVBox" unique_id=945105945]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MaterialsList" type="VBoxContainer" parent="FormVBox/ScrollContainer" unique_id=114203940]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="FormVBox" unique_id=85633229]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="UpdateButton" type="Button" parent="FormVBox/HBoxContainer3" unique_id=1418198810]
+layout_mode = 2
+text = "Update"
+
+[node name="CloseButton" type="Button" parent="FormVBox/HBoxContainer3" unique_id=1878961312]
+layout_mode = 2
+text = "Close"

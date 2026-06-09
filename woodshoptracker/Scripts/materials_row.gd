@@ -4,6 +4,11 @@ extends HBoxContainer
 @onready var cost: LineEdit = $Cost
 @onready var total: Label = $TotalCostLabel
 signal new_change
+var project_id: int
+var material_id: int
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect_signals()
@@ -37,7 +42,7 @@ func get_material_data() -> Dictionary:
 	if is_row_valid() == true:
 		var data = {
 			"number": number.text.to_int(),
-			"material_type": material_description.text,
+			"material_description": material_description.text,
 			"price": cost.text.to_float()
 		}
 		return data
@@ -61,6 +66,8 @@ func any_text_changed(_text:String) -> void:
 
 func setup_row(row_data:Dictionary):
 	number.text = str(row_data["quantity"])
-	material_description.text = row_data["material_name"]
+	material_description.text = row_data["material_description"]
 	cost.text = str(row_data["price"])
 	calculate_total()
+	project_id = row_data.get("project_id")
+	material_id = row_data.get("id")
