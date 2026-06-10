@@ -44,6 +44,13 @@ func request_active_projects() -> Array:
 	db.close_db()
 	return result
 
+func request_completed_projects() -> Array:
+	db.open_db()
+	db.query("Select * From projects where is_complete = 1")
+	var result = db.query_result
+	db.close_db()
+	return result
+
 func request_by_id(project_id:int) -> Dictionary:
 	db.open_db()
 	db.query_with_bindings("Select * From projects where id = ?", [project_id,])
@@ -108,4 +115,11 @@ func update_project(project_id, project_data):
 	db.query_with_bindings("""UPDATE projects SET
 						project_name = ?, customers_name =? WHERE id = ?""",
 						[project_data.get("project_name"), project_data.get("customer_name"), project_id])
+	db.close_db()
+
+func complete_project_by_id(project_id: int):
+	db.open_db()
+	db.query_with_bindings("""UPDATE projects SET
+						is_complete = 1 WHERE id = ?""", [project_id])
+
 	db.close_db()

@@ -8,14 +8,18 @@ var db_manager: DatabaseManager
 @onready var edit_form = preload("res://Scenes/edit_form.tscn")
 
 # Main App nodes
-@onready var add_project:Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/AddProjectButton
+@onready var add_project:Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/AddProjectButton
 @onready var Project_grid:GridContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer/ProjectGrid
 @onready var new_projects_panel: PanelContainer = $NewProjectPanel
 @onready var exit: Button = $MarginContainer/PanelContainer/VBoxContainer/PanelContainer/ExitButton
 @onready var content_hbox:HBoxContainer = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer
+@onready var active_button: Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ActiveButton
+@onready var completed_button: Button = $MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/CompleteButton
 
 var current_details_panel: Node = null
 var current_form_open: Node = null
+
+
 
 # new project panel nodes
 @onready var projects_name:LineEdit = $NewProjectPanel/VBoxContainer/ProjectsName
@@ -36,6 +40,8 @@ func connect_signals():
 	close_button.pressed.connect(close_button_pressed)
 	projects_name.text_submitted.connect(_on_enter_pressed)
 	customers_name.text_submitted.connect(_on_enter_pressed)
+	active_button.pressed.connect(show_active_cards)
+	completed_button.pressed.connect(show_completed)
 
 func add_new_project():
 	if current_details_panel != null:
@@ -72,6 +78,7 @@ func exit_button_pressed():
 	get_tree().quit()
 
 func show_active_cards():
+
 	for child in Project_grid.get_children():
 		child.queue_free()
 	var results = db_manager.request_active_projects()
@@ -81,6 +88,7 @@ func show_active_cards():
 		Project_grid.add_child(card)
 		card.CardClicked.connect(_on_card_clicked)
 		card.DeleteClicked.connect(delete_project_clicked)
+		card.CompletePressed.connect(complete_pressed)
 		var total_cost = db_manager.calculate_material_total_cost(project["id"])
 		card.card_setup(project, total_cost)
 
@@ -160,3 +168,23 @@ func delete_material_row(material_id, project_id):
 	on_edit_project_pressed(project_id)
 	_on_card_clicked(project_id)
 	show_active_cards()
+
+func complete_pressed(project_id:int):
+	db_manager.complete_project_by_id(project_id)
+	show_active_cards()
+
+
+func show_completed():
+
+	for child in Project_grid.get_children():
+		child.queue_free()
+	var results = db_manager.request_completed_projects()
+
+	for project in results:
+		var card = project_card.instantiate()
+		Project_grid.add_child(card)
+		card.CardClicked.connect(_on_card_clicked)
+		card.DeleteClicked.connect(delete_project_clicked)
+		card.CompletePressed.connect(complete_pressed)
+		var total_cost = db_manager.calculate_material_total_cost(project["id"])
+		card.card_setup(project, total_cost)

@@ -24,6 +24,15 @@ corner_radius_top_right = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlpmq"]
 
+[sub_resource type="InputEventKey" id="InputEventKey_x12gx"]
+device = -1
+alt_pressed = true
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_pfnfr"]
+events = [SubResource("InputEventKey_x12gx")]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbjc3"]
 content_margin_left = 10.0
 content_margin_top = 10.0
@@ -87,7 +96,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/PanelContainer" unique_id=1421733962]
-z_index = 1
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -101,14 +109,42 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="AddProjectButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1665696702]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=679894040]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AddProjectButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1665696702]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_mlpmq")
+shortcut = SubResource("Shortcut_pfnfr")
 text = "Add New Project"
+flat = true
+
+[node name="ActiveButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1136628999]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_mlpmq")
+shortcut = SubResource("Shortcut_pfnfr")
+text = "Active
+"
+flat = true
+
+[node name="CompleteButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1728095661]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_mlpmq")
+shortcut = SubResource("Shortcut_pfnfr")
+text = "Completed"
 flat = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=419772762]
