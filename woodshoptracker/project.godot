@@ -14,7 +14,7 @@ config/name="woodshoptracker"
 config/description="App to track woodworking projects "
 config/version="1.0"
 run/main_scene="uid://brxfk6ed7twr6"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
