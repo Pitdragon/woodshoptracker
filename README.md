@@ -16,7 +16,9 @@ A desktop application for organizing woodworking projects, customers, materials,
 
 ## Screenshots
 
-![alt text](image.png) ![alt text](image-1.png) ![alt text](image-2.png)
+![Active Project and Details](image.png) 
+![Edit Project Form](image-1.png) 
+![adding new materials form](image-2.png)
 
 ## Technologies
 
